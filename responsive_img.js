@@ -1,5 +1,5 @@
 jQuery( function( $ ) {
-	var $imgElem = $( '.is-imgchange' ),
+	let $imgElem = $( '.is-imgchange' ),
 		img_sp = '-sp',
 		img_pc = '-pc',
 		pcWidth = 769; //break point for PC
@@ -7,8 +7,9 @@ jQuery( function( $ ) {
 	// sp <-> pc
 	$( document ).ready( function() {
 		$imgElem.each( function() {
-			var $this = $( this );
-			if( window.innerWidth < pcWidth ) {
+			let $this = $( this );
+			let resizedWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			if( resizedWidth < pcWidth ) {
 				$this.attr( 'src', $this.attr( 'src' ).replace( img_pc, img_sp ) );
 			} else {
 				$this.attr( 'src', $this.attr( 'src' ).replace( img_sp, img_pc ) );
@@ -16,15 +17,4 @@ jQuery( function( $ ) {
 		} );
 	} );
 
-	$imgElem.each( function() {
-		var $this = $( this );
-		function imgSize() {
-			if( window.innerWidth < pcWidth ) {
-				$this.attr( 'src', $this.attr( 'src' ).replace( img_pc, img_sp ) );
-			} else {
-				$this.attr( 'src', $this.attr( 'src' ).replace( img_sp, img_pc ) );
-			}
-		}
-		$( window ).resize( function() { imgSize(); } );
-	} );
 } );
